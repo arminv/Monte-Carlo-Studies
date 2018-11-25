@@ -25,19 +25,19 @@ integrate(function(x){3*x^4 + 2*x*exp(x) + 1}, 0, 1)
 # The basic/simple MC to convert the integral into an expectation.
 option_A	<-	function(n){
             
-            # our integral's upper bound (or: max - min)
-						z <- 1
+    # our integral's upper bound (or: max - min)
+    z <- 1
 						
-						# uniform RVs: u ~ u [0, 1]
-						u	<- runif(n, min= 0, max= z)
+    # uniform RVs: u ~ u [0, 1]
+    u	<- runif(n, min= 0, max= z)
 						
-						# This is the function h. NOTE: we need to multiply by upper bound z to convert the expression back to the original integral 
-						# we are interested in. It is necessary because unifrom RVs are essentially dividing the expression by z and hence the need
-						# for multiplying by z to revert it.
-						h	<- z * (3*u^4+2*u*exp(u)+1)
+    # This is the function h. NOTE: we need to multiply by upper bound z to convert the expression back to the original integral 
+    # we are interested in. It is necessary because unifrom RVs are essentially dividing the expression by z and hence the need
+    # for multiplying by z to revert it.
+    h	<- z * (3*u^4+2*u*exp(u)+1)
 						
-						# evaluating the expectation to get a value for the integral
-						return(mean(h))
+    # evaluating the expectation to get a value for the integral
+    return(mean(h))
 }
 
 # Checking for different numbers of replications (iterations) n to get an overall picture of the behaviour of this method :
@@ -317,7 +317,6 @@ gene_2 <- function(n, min, max){
   	return(y)
 }
 
-
 option_B2 <- function(n){
   # n uniform RVs generated	
 	u <- runif(n, 0, 1)
@@ -359,7 +358,8 @@ abline(h=3.6)
 # C) Stratified Sampling:
 
 f 		<- function(x) {(3*x^4 + 2*x*exp(x) + 1)}
-h_2 	<- function(x) {(3*x^4 + 2*x*exp(x) + 1) / (4*x^3)}				# s.t : h = f / g
+# such that : h = f / g
+h_2 	<- function(x) {(3*x^4 + 2*x*exp(x) + 1) / (4*x^3)}
 G_2		<- function(x) {x^4}
 
 # this function samples from the importance density g(x) by using the Inverse Transform method:
@@ -440,10 +440,14 @@ resD2		<- rep(0, B)
 n		<-	10^5
 
 for(i in 1:B){
-	resA2[i]		<- strat_B2(n, 1)									# No stratification (m=1)
-	resB2[i]		<- strat_B2(n, m=10)							# 10 strata, equal allocation
-	resC2[i] 		<- strat_C2(n, m=10, B=1000)			# 10 strata, proportional allocation
-	resD2[i]		<- strat_C2(n, m= 30, B=1000)			# 30 strata, proportional allocation
+  # No stratification (m=1):
+	resA2[i]		<- strat_B2(n, 1)
+	# 10 strata, equal allocation:
+  resB2[i]		<- strat_B2(n, m=10)
+  # 10 strata, proportional allocation:
+	resC2[i] 		<- strat_C2(n, m=10, B=1000)
+	# 30 strata, proportional allocation:
+	resD2[i]		<- strat_C2(n, m= 30, B=1000)
 }
 
 boxplot(resA2, resB2, resC2, resD2, names=c("No Stratification", "Equal Number", "Proportional, 10", "Proportional, 30"), 
