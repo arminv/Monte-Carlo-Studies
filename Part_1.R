@@ -1,6 +1,4 @@
-# Armin Varshokar
-
-# ======================================================================================================
+# ===================================================================================================================================
 # 1) Compare the following methods of Monte Carlo integration: A) Regular Monte Carlo ; B) Importance Sampling ; C) Stratified Sampling
 
 # First we need to find an example/ an appropriate function to be integrated through different methods:
@@ -16,10 +14,10 @@ abline(v=1, col="red")
 # The true value of the integral we are interested in, evaluated over interval (0, 1):
 integrate(function(x){3*x^4 + 2*x*exp(x) + 1}, 0, 1)
 
-# >> We proceed with this example to perform our simulations, i.e. our function 'f' is : f(x) = 3*x^4 + 2*x*exp(x) +1 and we would like to 
-# find its integral over: (0, 1) for example.
+# >> We proceed with this example to perform our simulations, i.e. our function 'f' is : f(x) = 3*x^4 + 2*x*exp(x) +1 and we would like 
+# to find its integral over: (0, 1) for example.
 
-# ==============================================
+# ===================================================================================================================================
 # A) Regular (Basic) Monte Carlo:
 
 # We implement this method as a function, this will help with the simulation study/comparison that comes next:
@@ -70,7 +68,7 @@ abline(h=3.6)
 
 # By the 10^4 th simulation this given sequence gets very close to the true value of the integral
 
-# ==============================================
+# ===================================================================================================================================
 # B) Importance Sampling: hypothetically, we have an infinite number of combinations for the function f and the candidate density g. 
 # However, we would like the density to have certain properties that match the function's properties. 
 # We take two different importance densities and compare their performance:
@@ -138,14 +136,15 @@ for (i in 1:10^4){
 	esterr_B1[i] 	<- sqrt(sum((h2[1:i]-estint_B1[1:i])^2))  / i 
 }
 
-plot(estint_B1, xlab="Mean and Error Range", type="l", lwd=2, col= "red", main="Example 1 : Importance Sampling MC Convergence", ylim=c(2.5,4.5))
+plot(estint_B1, xlab="Mean and Error Range", type="l", lwd=2, col= "red", main="Example 1 : Importance Sampling MC Convergence",
+     ylim=c(2.5,4.5))
 lines(estint_B1 + 2*esterr_B1, col= "gold", lwd=2)
 lines(estint_B1 - 2*esterr_B1, col="gold", lwd=2)
 abline(h=3.6)
 
 # Again, the sequence converges close to the true value as the number of simulations increases
 
-# ==============================================
+# ===================================================================================================================================
 # C) Stratified Sampling:
 
 f 		<- function(x) {(3*x^4 + 2*x*exp(x) + 1)}
@@ -160,7 +159,7 @@ gene_1  <- function(n, min, max){
   	return(y)
 }
 
-#================
+# ===================================================================================================================================
 # m strata, number of RVs taken on each stratum = ni = n/m --> equal number per stratum
 
 strat_B1  <- function(n, m){
@@ -179,7 +178,7 @@ strat_B1  <- function(n, m){
 # evaluating once to check that it works
 strat_B1(1000, 10)
 
-#================
+# ===================================================================================================================================
 # m strata, number of RVs taken on each stratum = ni = n*(a*devs)/sum(a*devs)  --> "proportional allocation"
 
 strat_C1  <- function(n, m, B){
@@ -214,7 +213,7 @@ strat_C1  <- function(n, m, B){
 # evaluating once to check that it works:
 strat_C1(1000, 10, 1000)
 
-#================
+# ===================================================================================================================================
 # Comparing the three different stratified sampling methods via a simple simulation study:
 
 # making results reproducible by using the built-in set.seed() function
@@ -247,9 +246,10 @@ boxplot(resA1, resB1, resC1, resD1, names=c("No Stratification", "Equal Number",
 # the 'true' value of the integral from before:
 abline(h=3.6, col="red", lwd=1)
 
-# Conclusion: As expected, the fourth method (30 strata with proportional allocation) is the most accurate of all stratified methods above.
+# Conclusion: As expected, the fourth method (30 strata with proportional allocation) is the most accurate of all stratified 
+# methods above.
 
-# ==============================================
+# ===================================================================================================================================
 # Simulation Study: we now compare all different methods for this given importance density example:
 
 # making results reproducible by using set.seed() function
@@ -283,7 +283,7 @@ abline(h=3.6, col="red", lwd=1)
 # It has the closest estimate to the true value of the integral as well as having the smallest error margin. 
 # Next are the other stratified sampling methods followed by simple monte carlo and importance sampling.
 
-# ======================================================================================================
+# ===================================================================================================================================
 
 # IMPORTANCE DENSITY No 2:  another importance density:
 
@@ -347,14 +347,15 @@ for (i in 1:10^4){
 	esterr_B2[i] 	<- sqrt(sum((h2[1:i]-estint_B2[1:i])^2))  / i 
 }
 
-plot(estint_B2, xlab="Mean and Error Range", type="l", lwd=2, col= "red", main="Example 2 : Importance Sampling MC Convergence", ylim=c(2.5,4.5))
+plot(estint_B2, xlab="Mean and Error Range", type="l", lwd=2, col= "red", main="Example 2 : Importance Sampling MC Convergence",
+     ylim=c(2.5,4.5))
 lines(estint_B2 + 2*esterr_B2, col= "gold", lwd=2)
 lines(estint_B2 - 2*esterr_B2, col="gold", lwd=2)
 abline(h=3.6)
 
 # Again, the sequence converges close to the true value as the number of simulations increases
 
-# ==============================================
+# ===================================================================================================================================
 # C) Stratified Sampling:
 
 f 		<- function(x) {(3*x^4 + 2*x*exp(x) + 1)}
@@ -368,7 +369,7 @@ gene_2 <- function(n, min, max){
   	return(y)
 }
 
-#================
+# ===================================================================================================================================
 # m strata, number of RVs taken on each stratum = ni = n/m --> equal number per stratum
 
 strat_B2  <-	function(n, m){
@@ -387,7 +388,7 @@ strat_B2  <-	function(n, m){
 # evaluating once to check that it works
 strat_B2(1000, 10)
 
-#================
+# ===================================================================================================================================
 # m strata, number of RVs taken on each stratum = ni = n*(a*devs)/sum(a*devs)  --> "proportional allocation"
 
 strat_C2  <-	function(n, m, B){
@@ -423,7 +424,7 @@ strat_C2  <-	function(n, m, B){
 # evaluating once to check that it works:
 strat_C2(1000, 10, 1000)
 
-#================
+# ===================================================================================================================================
 # Comparing the three different stratified sampling methods via a simple simulation study:
 
 # making results reproducible by using the built-in set.seed() function
@@ -450,9 +451,10 @@ boxplot(resA2, resB2, resC2, resD2, names=c("No Stratification", "Equal Number",
 # the 'true' value of the integral from before:
 abline(h=3.6, col="red", lwd=1)
 
-# Conclusion: As expected, the fourth method (30 strata with proportional allocation) is the most accurate of all stratified methods above.
+# Conclusion: As expected, the fourth method (30 strata with proportional allocation) is the most accurate of all stratified 
+# methods above.
 
-# ==============================================
+# ===================================================================================================================================
 # Simulation Study: we now compare all different methods for this given importance density example:
 
 set.seed(1234567)
@@ -482,13 +484,14 @@ abline(h=3.6, col="red", lwd=1)
 # Next are the other stratified sampling methods followed by simple monte carlo and importance sampling. 
 # Also note that this importance density does not do as well as the first density.
 
-# ======================================================================================================
+# ===================================================================================================================================
 # After running all the above code, the following lines generate the comparative boxplot of all methods considered for both examples:
 
-boxplot(res1_1, res2_1, res2_2, res3_1, res3_2, res4_1, res4_2, res5_1, res5_2, names=c("Basic", "Importance 1", "Importance 2",
-                                                                                        "Strat A 1", "Strat A 2", "Strat B 1", "Strat B 2", 
-                                                                                        "Strat C 1", "Strat C 2"), ylim=c(3.45,3.7), col=grey(0.8),
-                                                                                        range=0, main = "Example 1 & 2 : All Methods Compared")
+boxplot(res1_1, res2_1, res2_2, res3_1, res3_2, res4_1, res4_2, res5_1, res5_2, 
+        names=c("Basic", "Importance 1", "Importance 2",
+                "Strat A 1", "Strat A 2", "Strat B 1", "Strat B 2", 
+                "Strat C 1", "Strat C 2"), ylim=c(3.45,3.7), col=grey(0.8),
+                range=0, main = "Example 1 & 2 : All Methods Compared")
 abline(h=3.6, col="red", lwd=1)
 
 # And this generates all the functions in one graph:
@@ -501,6 +504,4 @@ curve(3*x^2, xlim=c(-3,3), ylim=c(-1,20), col="blue", add=T)
 # second density:
 curve(4*x^3, xlim=c(-3,3), ylim=c(-1,20), col="red", add=T)
 abline(v=1, col="green")																					
-
-# ======================================================================================================
-# ======================================================================================================
+# ===================================================================================================================================
