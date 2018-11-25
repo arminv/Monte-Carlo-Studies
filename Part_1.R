@@ -1,5 +1,6 @@
 # ===================================================================================================================================
-# 1) Compare the following methods of Monte Carlo integration: A) Regular Monte Carlo ; B) Importance Sampling ; C) Stratified Sampling
+# 1) Compare the following methods of Monte Carlo integration: 
+# A) Regular Monte Carlo ; B) Importance Sampling ;C) Stratified Sampling
 
 # First we need to find an example/ an appropriate function to be integrated through different methods:
 
@@ -14,8 +15,8 @@ abline(v=1, col="red")
 # The true value of the integral we are interested in, evaluated over interval (0, 1):
 integrate(function(x){3*x^4 + 2*x*exp(x) + 1}, 0, 1)
 
-# >> We proceed with this example to perform our simulations, i.e. our function 'f' is : f(x) = 3*x^4 + 2*x*exp(x) +1 and we would like 
-# to find its integral over: (0, 1) for example.
+# >> We proceed with this example to perform our simulations, i.e. our function 'f' is : f(x) = 3*x^4 + 2*x*exp(x) +1 and 
+# we would like to find its integral over: (0, 1) for example.
 
 # ===================================================================================================================================
 # A) Regular (Basic) Monte Carlo:
@@ -332,8 +333,8 @@ option_B2(10^3)     # n = 1,000
 option_B2(10^6)     # n = 1,000,000
 
 
-# Similar to part A and part B for Example no 1, we can check the convergence of a single sequence to the true value of the integral
-# when using this method :
+# Similar to part A and part B for Example no 1, we can check the convergence of a single sequence to the true value 
+# of the integral when using this method :
 
 set.seed(12345)
 estint_B2  <- rep(0, 10^4)
@@ -489,7 +490,7 @@ abline(h=3.6, col="red", lwd=1)
 # Also note that this importance density does not do as well as the first density.
 
 # ===================================================================================================================================
-# After running all the above code, the following lines generate the comparative boxplot of all methods considered for both examples:
+# After running all the above code,the following lines generate the comparative boxplot of all methods considered for both examples:
 
 boxplot(res1_1, res2_1, res2_2, res3_1, res3_2, res4_1, res4_2, res5_1, res5_2, 
         names=c("Basic", "Importance 1", "Importance 2",
